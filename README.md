@@ -10,11 +10,9 @@ Complex Transfinite Barycentric Mappings with Similarity Kernels
 - MATLAB (>2014a)
 
 # How to run the code
-Execute the script invGamma_demo.m in MATLAB, a figure will be generated, which will be a 
+Execute the script fig4.m in MATLAB, a figure will be generated, which will be a 
 reproduction of figure 4 in the paper.
-To reproduce figure 5 in the paper, simply change line 4 in the script to the following,
-
-datafile = 'fig5_data';
+Similarly, to reproduce figure 5 in the paper, simply run fig5.m.
 
 # What the code does
 The script will load the source contour and cubic spline parameters for generating the target
