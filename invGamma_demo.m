@@ -1,8 +1,11 @@
-datafile = 'fig4_data';
+%% load contour w from file, and generate contour f as a cubic spline
+% w and f do not have to be splines, but they need to be continuse and differntiable
+
+datafile = 'fig4_data';  % fig5_data
+
 
 load(datafile);
 
-%%
 fR2C = @(x) complex(x(:,1), x(:,2));
 fC2R = @(x) [real(x) imag(x)];
 
@@ -44,11 +47,13 @@ iknots = iknots(1:end-1);
 subplot(331);
 h0 = drawmesh(t, x);  title('Source');
 hold on; plot(w(iknots), 'o', 'MarkerFaceColor', [0 0 0.7], 'MarkerEdgeColor', 'none');
+plot(w, '-k');
 colormap(jet(8192));
 
 subplot(332); 
 h = drawmesh(t, fz);  title('Target');
 hold on; plot(f(iknots), 'o', 'MarkerFaceColor', [0 0 0.7], 'MarkerEdgeColor', 'none');
+plot(f, '-k');
 colormap(jet(8192));
 
 fSetMeshColor([h; h0], abs(x-mean(x)));
@@ -73,7 +78,8 @@ converged = false(nv, 1);
 zIters = {};
 stats = [ norm( z-x ) mean( abs(z-x) ) minmax( abs(z-x)' ) ];
 
-for it=1:6
+nIter = 6;
+for it=1:nIter
     for i=1:nv
         if converged(i), continue; end
 
@@ -107,7 +113,7 @@ for it=1:6
 end
 
 
-for i=1:6
+for i=1:nIter
     subplot(3,3,i+3); h=drawmesh(t, zIters{i}); title(i);
     fSetMeshColor(h, abs(zIters{end}-mean(x)));
     colormap(jet(8192));
